@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center p-3 bg-light">
+        <h1 class="h4">CashFlow</h1>
+        <div id="user-info" class="d-flex align-items-center">
+            <span id="username" class="mr-3"></span>
+            <button id="logout-btn" class="btn btn-danger">Logout</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h2 class="mt-5">Welcome to the Home Page</h2>
+        <p>This is the main page content. More to come!</p>
+
+        <button id="create-accounting-btn" class="btn btn-primary mt-3">Создать учет</button>
+
+        <div id="accountings" class="mt-4">
+            <h3>Ваши учеты</h3>
+            <ul id="accountings-list" class="list-group">
+                <!-- Учеты будут добавляться сюда динамически -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Модальное окно для создания учета -->
+    <div class="modal" id="createAccountingModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Создать учет</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createAccountingForm">
+                        <div class="form-group">
+                            <label for="accountingName">Название учета</label>
+                            <input type="text" class="form-control" id="accountingName" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="submit" form="createAccountingForm" class="btn btn-primary">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для редактирования учета -->
+    <div class="modal" id="editAccountingModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Редактировать учет</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editAccountingForm">
+                        <div class="form-group">
+                            <label for="editAccountingName">Название учета</label>
+                            <input type="text" class="form-control" id="editAccountingName" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="submit" form="editAccountingForm" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/home.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
