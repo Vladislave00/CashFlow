@@ -16,25 +16,24 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.Static("/static", "static") // Убедитесь, что путь верный
+	router.Static("/static", "static")
 
-	// Подключение маршрутов для HTML-страниц
-	router.LoadHTMLGlob("static/*.html") // Загружаем HTML-шаблоны из папки static
+	router.LoadHTMLGlob("static/*.html")
 
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index.html", nil) // Главная страница
+		c.HTML(200, "index.html", nil)
 	})
 
 	router.GET("/login", func(c *gin.Context) {
-		c.HTML(200, "login.html", nil) // Страница входа
+		c.HTML(200, "login.html", nil)
 	})
 
 	router.GET("/register", func(c *gin.Context) {
-		c.HTML(200, "register.html", nil) // Страница регистрации
+		c.HTML(200, "register.html", nil)
 	})
 
 	router.GET("/accounting", func(c *gin.Context) {
-		c.HTML(200, "accounting.html", nil) // Страница учета
+		c.HTML(200, "accounting.html", nil)
 	})
 
 	router.GET("/transactions", func(c *gin.Context) {

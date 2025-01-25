@@ -1,5 +1,5 @@
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Отменяем стандартное поведение формы
+    event.preventDefault(); 
 
     const formData = {
         email: document.getElementById('email').value,
@@ -17,11 +17,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         if (response.ok) {
             const result = await response.json();
-            localStorage.setItem('token', result.token); // Сохраняем токен в localStorage
-            window.location.href = '/'; // Перенаправляем на главную страницу
+            localStorage.setItem('token', result.token);
+            window.location.href = '/';
         } else {
             const errorText = await response.text();
-            alert(`Error: ${errorText}`); // Выводим ошибку
+            alert(`Error: ${errorText}`);
         }
     } catch (error) {
         console.error('Error:', error);

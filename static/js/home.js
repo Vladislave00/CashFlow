@@ -11,15 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const editAccountingForm = document.getElementById('editAccountingForm');
     const editAccountingNameInput = document.getElementById('editAccountingName');
 
-    let currentEditingId = null; // Для хранения ID редактируемого учета
+    let currentEditingId = null;
 
     if (!token) {
         window.location.href = '/login';
     } else {
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
-            usernameElement.textContent = payload.name; 
-            loadAccountings(); 
+            usernameElement.textContent = payload.name;
+            loadAccountings();
         } catch (error) {
             console.error("Failed to decode token:", error);
         }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     createAccountingBtn.addEventListener('click', function() {
-        createAccountingModal.show(); // Показываем модальное окно
+        createAccountingModal.show();
     });
 
     createAccountingForm.addEventListener('submit', function(event) {
@@ -53,32 +53,31 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            accountingsList.innerHTML = ''; // Очищаем список перед добавлением
+            accountingsList.innerHTML = '';
             data.data.forEach(accounting => {
                 const li = document.createElement('li');
                 li.className = 'list-group-item d-flex justify-content-between align-items-center';
-                
-                // Создаем ссылку на страницу учета
+
                 const accountingLink = document.createElement('a');
-                accountingLink.href = `/accounting?id=${accounting.id}`; // Изменили путь на /accounting
-                accountingLink.textContent = accounting.name; // Имя учета
+                accountingLink.href = `/accounting?id=${accounting.id}`;
+                accountingLink.textContent = accounting.name;
                 accountingLink.className = 'accounting-link';
-                
+
                 li.appendChild(accountingLink);
-    
+
                 const buttonGroup = document.createElement('div');
                 buttonGroup.className = 'btn-group';
-    
+
                 const editButton = document.createElement('button');
                 editButton.className = 'btn btn-warning btn-sm';
                 editButton.textContent = 'Изменить';
                 editButton.onclick = () => openEditModal(accounting.id, accounting.name);
-                
+
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'btn btn-danger btn-sm';
                 deleteButton.textContent = 'Удалить';
                 deleteButton.onclick = () => deleteAccounting(accounting.id);
-    
+
                 buttonGroup.appendChild(editButton);
                 buttonGroup.appendChild(deleteButton);
                 li.appendChild(buttonGroup);
@@ -87,8 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error("Error loading accountings:", error));
     }
-    
-    
 
     function createAccounting() {
         const name = accountingNameInput.value;
@@ -99,13 +96,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ name }) // Отправляем только имя
+            body: JSON.stringify({ name })
         })
         .then(response => {
             if (response.ok) {
-                loadAccountings(); // Обновляем список учетов
-                createAccountingModal.hide(); // Закрываем модальное окно
-                accountingNameInput.value = ''; // Очищаем поле ввода
+                loadAccountings();
+                createAccountingModal.hide();
+                accountingNameInput.value = '';
             } else {
                 console.error("Failed to create accounting:", response.statusText);
             }
@@ -114,9 +111,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function openEditModal(id, name) {
-        currentEditingId = id; // Сохраняем ID редактируемого учета
-        editAccountingNameInput.value = name; // Заполняем поле ввода текущим именем
-        editAccountingModal.show(); // Показываем модальное окно редактирования
+        currentEditingId = id;
+        editAccountingNameInput.value = name;
+        editAccountingModal.show();
     }
 
     function updateAccounting() {
@@ -132,8 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             if (response.ok) {
-                loadAccountings(); // Обновляем список учетов
-                editAccountingModal.hide(); // Закрываем модальное окно
+                loadAccountings();
+                editAccountingModal.hide();
             } else {
                 console.error("Failed to update accounting:", response.statusText);
             }
@@ -151,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 if (response.ok) {
-                    loadAccountings(); // Обновляем список учетов
+                    loadAccountings();
                 } else {
                     console.error("Failed to delete accounting:", response.statusText);
                 }

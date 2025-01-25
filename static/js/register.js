@@ -1,5 +1,5 @@
 document.getElementById('registerForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Отменяем стандартное поведение формы
+    event.preventDefault(); 
 
     const formData = {
         name: document.getElementById('nickname').value,
@@ -18,11 +18,11 @@ document.getElementById('registerForm').addEventListener('submit', async functio
 
         if (response.ok) {
             const result = await response.json();
-            alert(`User created with ID: ${result.user_id}`); // Выводим ID созданного пользователя
-            window.location.href = '/login'; // Перенаправляем на страницу авторизации
+            alert(`User created with ID: ${result.user_id}`); 
+            window.location.href = '/login'; 
         } else {
             const errorText = await response.text();
-            alert(`Error: ${errorText}`); // Выводим ошибку
+            alert(`Error: ${errorText}`); 
         }
     } catch (error) {
         console.error('Error:', error);
